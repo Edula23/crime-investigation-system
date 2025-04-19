@@ -5,3 +5,10 @@
 #include <cppconn/resultset.h>
 
 using namespace std;
+
+int main(){
+
+
+
+  return 0;
+}
