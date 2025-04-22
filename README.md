@@ -5,7 +5,7 @@ This is our group project for Fundamentals of Programming II. We're building a c
 
 # Overview
 
-The Crime Investigation and Case Management System is a C++ application designed to streamline the management of crime cases within law enforcement agencies. This system provides a centralized platform for storing and managing crime-related data, facilitating task assignment, progress monitoring, and inter-departmental coordination.It enables users to report crimes, monitor their status, and facilitate investigations through a user-friendly interface backed by a MySQL database.
+The Crime Investigation and Case Management System is a C++ application designed to streamline the management of crime cases within law enforcement agencies. This system provides a centralized platform for storing and managing crime-related data, facilitating task assignment, progress monitoring, and inter-departmental coordination.It enables users to report crimes, monitor their status, and facilitate investigations through a user-friendly interface backed by a MySQL database.By digitizing case records, this system addresses the challenges of traditional paper-based methods, ensuring secure and organized access to critical crime data.
 
 
 
@@ -23,17 +23,24 @@ Project Structure (basic idea, subject to change)
 
 
 # Features
-**Add New Cases**: Users can input details about new crime cases, including case number, description, status, date reported, assigned officer, department, and progress updates.
 
-**View Existing Cases**: Users can retrieve and display all cases stored in the database, providing a comprehensive overview of ongoing and past investigations.
+**User Authentication:** Provides a secure login mechanism for authorized personnel, ensuring that sensitive information is protected.
 
-**Update Case Status**: Users can change the status of a specific case (e.g., from "Open" to "Closed") based on its unique case ID, allowing for effective case management.
+**Comprehensive Case Management:** Users can create, update, and monitor cases with extensive details, facilitating thorough investigations.
 
-**Assign Tasks to Officers**: Users can assign specific officers to cases, ensuring accountability and clear task delegation within the department.
+**Witness and Victim Statements:** Efficiently manage and store statements from witnesses and victims, which are crucial for case development.
 
-**Secure Data Storage**: Utilizes MySQL for high-performance, scalable, and secure data storage, ensuring that sensitive information is handled appropriately.
+**Evidence Management:** Record, track, and manage evidence linked to each case, ensuring that all pertinent information is organized and accessible.
 
-**User -Friendly Console Interface**: A simple menu-driven console interface allows users to navigate through options easily and perform operations without complex commands.
+**Dynamic Case Status Updates:** Users can easily update the status of cases (e.g., open, closed, under investigation), allowing for better tracking of case progress.
+
+**Centralized Database:** Utilizes MySQL for secure, scalable, and high-performance data storage, ensuring that all case-related information is stored in one location.
+
+**Reporting Capabilities:** Generate detailed reports for case summaries and statistical analysis, aiding in decision-making and resource allocation.
+
+**User -Friendly Interface:** Designed with an intuitive interface that simplifies navigation and enhances user experience, making it easy for personnel to access the information they need quickly.
+
+
 
 # Prerequisites
 
