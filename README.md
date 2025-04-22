@@ -1,4 +1,4 @@
-# crime-investigation-system
+# Crime-Investigation-System
 
 
 This is our group project for Fundamentals of Programming II. We're building a command-line based crime investigation and case management system in C++, using MySQL for the database (as proposed). Below is just a rough plan for organizing the work and making sure everything matches our original proposal.
