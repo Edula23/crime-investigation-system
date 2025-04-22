@@ -1,7 +1,12 @@
 # Crime Investigation and Case Management System
 
 
-This is our group project for Fundamentals of Programming II. We're building a command-line based crime investigation and case management system in C++, using MySQL for the database (as proposed). Below is just a rough plan for organizing the work and making sure everything matches our original proposal.
+This is our group project for Fundamentals of Programming II. We're building a command-line based crime investigation and case management system in C++, using MySQL for the database (as proposed). 
+
+# Overview
+
+The Crime Investigation and Case Management System is a C++ application designed to streamline the management of crime cases within law enforcement agencies. This system provides a centralized platform for storing and managing crime-related data, facilitating task assignment, progress monitoring, and inter-departmental coordination.It enables users to report crimes, monitor their status, and facilitate investigations through a user-friendly interface backed by a MySQL database.
+
 
 
 
@@ -15,6 +20,30 @@ Project Structure (basic idea, subject to change)
 - evidence_module.cpp/.h --> upload/store reference to digital evidence
 - notification_module.cpp/.h --> court dates, deadlines, etc.
 - report_module.cpp/.h   --> basic reports (text or console output)
+
+
+# Features
+**Add New Cases**: Users can input details about new crime cases, including case number, description, status, date reported, assigned officer, department, and progress updates.
+
+**View Existing Cases**: Users can retrieve and display all cases stored in the database, providing a comprehensive overview of ongoing and past investigations.
+
+**Update Case Status**: Users can change the status of a specific case (e.g., from "Open" to "Closed") based on its unique case ID, allowing for effective case management.
+
+**Assign Tasks to Officers**: Users can assign specific officers to cases, ensuring accountability and clear task delegation within the department.
+
+**Secure Data Storage**: Utilizes MySQL for high-performance, scalable, and secure data storage, ensuring that sensitive information is handled appropriately.
+
+**User -Friendly Console Interface**: A simple menu-driven console interface allows users to navigate through options easily and perform operations without complex commands.
+
+# Prerequisites
+
+Before running the application, ensure you have the following installed:
+
+**Development Environment:** An IDE or text editor (e.g., Visual Studio, Code::Blocks, or any text editor) for writing and compiling C++ code.
+
+**MySQL Server:** MySQL server installed and running on your machine or accessible remotely.
+
+**MySQL Connector/C++:** The MySQL Connector/C++ library for database connectivity.
 
 
 
