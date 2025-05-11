@@ -352,8 +352,16 @@ void updateCaseStatus(sql::Connection* con) {
         cout << "Invalid Criminal ID.\n";
         return;
     }
-
-
+// Check if criminal exists
+    unique_ptr<sql::PreparedStatement> checkStmt(
+        con->prepareStatement("SELECT id, case_status FROM criminals WHERE id = ?")
+    );
+    checkStmt->setInt(1, criminalId);
+    unique_ptr<sql::ResultSet> res(checkStmt->executeQuery());
+    if (!res->next()) {
+        cout << "Criminal ID " << criminalId << " not found.\n";
+        return;
+    }
 
 
 
