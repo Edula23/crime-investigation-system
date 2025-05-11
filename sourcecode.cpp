@@ -258,6 +258,102 @@ void addCriminalInfo(sql::Connection* con) {
     }
 }
 
+void showCriminals(sql::Connection* con) {
+    cout << "\n--- Recorded Criminals ---\n";
+    unique_ptr<sql::Statement> stmt(con->createStatement());
+    unique_ptr<sql::ResultSet> res(stmt->executeQuery("SELECT id, name, age, gender, crime, last_known_location, case_status, witness_record FROM criminals"));
+
+    cout << left << setw(5) << "ID"
+        << setw(25) << "Name"
+        << setw(5) << "Age"
+        << setw(8) << "Gender"
+        << setw(30) << "Crime"
+        << setw(25) << "Last Known Location"
+        << setw(12) << "Case Status"
+        << setw(40) << "Witness Record" << "\n";
+
+    cout << string(140, '-') << "\n";
+
+    while (res->next()) {
+        string witnessRec = res->getString("witness_record");
+        // Truncate witness record for display if too long
+        if (witnessRec.length() > 37) {
+            witnessRec = witnessRec.substr(0, 34) + "...";
+        }
+
+        cout << setw(5) << res->getInt("id")
+            << setw(25) << res->getString("name")
+            << setw(5) << res->getInt("age")
+            << setw(8) << res->getString("gender")
+            << setw(30) << res->getString("crime")
+            << setw(25) << res->getString("last_known_location")
+            << setw(12) << res->getString("case_status")
+            << setw(40) << witnessRec << "\n";
+    }
+}
+
+void searchCases(sql::Connection* con) {
+    cout << "\n--- Search Cases by Status ---\n";
+    cout << "Enter case status to search (Open/Closed): ";
+    string status;
+    getline(cin, status);
+    if (status != "Open" && status != "Closed") {
+        cout << "Invalid case status. Use 'Open' or 'Closed'.\n";
+        return;
+    }
+
+    unique_ptr<sql::PreparedStatement> pstmt(
+        con->prepareStatement("SELECT id, name, age, gender, crime, last_known_location, case_status, witness_record FROM criminals WHERE case_status = ?")
+    );
+    pstmt->setString(1, status);
+
+    unique_ptr<sql::ResultSet> res(pstmt->executeQuery());
+
+    cout << left << setw(5) << "ID"
+        << setw(25) << "Name"
+        << setw(5) << "Age"
+        << setw(8) << "Gender"
+        << setw(30) << "Crime"
+        << setw(25) << "Last Known Location"
+        << setw(12) << "Case Status"
+        << setw(40) << "Witness Record" << "\n";
+
+    cout << string(140, '-') << "\n";
+bool found = false;
+    while (res->next()) {
+        found = true;
+        string witnessRec = res->getString("witness_record");
+        if (witnessRec.length() > 37) {
+            witnessRec = witnessRec.substr(0, 34) + "...";
+        }
+        cout << setw(5) << res->getInt("id")
+            << setw(25) << res->getString("name")
+            << setw(5) << res->getInt("age")
+            << setw(8) << res->getString("gender")
+            << setw(30) << res->getString("crime")
+            << setw(25) << res->getString("last_known_location")
+            << setw(12) << res->getString("case_status")
+            << setw(40) << witnessRec << "\n";
+    }
+    if (!found) {
+        cout << "No cases found with status '" << status << "'.\n";
+    }
+}
+void updateCaseStatus(sql::Connection* con) {
+    cout << "\n--- Update Case Status ---\n";
+    cout << "Enter Criminal ID to update case status: ";
+    string criminalIdStr;
+    getline(cin, criminalIdStr);
+    int criminalId;
+    try {
+        criminalId = stoi(criminalIdStr);
+    }
+    catch (...) {
+        cout << "Invalid Criminal ID.\n";
+        return;
+    }
+
+
 
 
 
