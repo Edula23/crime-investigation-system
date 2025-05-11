@@ -30,12 +30,12 @@ void updateCaseStatus(sql::Connection* con);
 
 int main() {
     try {
-        sql::mysql::MySQL_Driver* driver = sql::mysql::get_mysql_driver_instance(); // Get the MySQL driver instance
+        sql::mysql::MySQL_Driver* driver = sql::mysql::get_mysql_driver_instance(); 
         unique_ptr<sql::Connection> con(driver->connect(DB_HOST, DB_USER, DB_PASS)); // Create a unique pointer to a MySQL connection
         // Create and select database
         unique_ptr<sql::Statement> stmt(con->createStatement()); // Create a statement object for executing SQL queries
         stmt->execute("CREATE DATABASE IF NOT EXISTS " + DB_NAME); // Create the database if it does not exist
-        stmt->execute("USE " + DB_NAME); // Select the database for use
+        stmt->execute("USE " + DB_NAME); 
         cout << "Crime Investigation System\n"; 
         cout << "--------------------------\n"; 
        
@@ -104,7 +104,7 @@ switch (choice) {
         catch (sql::SQLException& e) {            // Catch SQL exceptions
         cerr << "SQL error: " << e.what() << "\n"; // Print SQL error message
         cerr << "MySQL error code: " << e.getErrorCode() << "\n"; // Print MySQL error code
-        cerr << "SQLState: " << e.getSQLState() << "\n"; // Print SQL state
+        cerr << "SQLState: " << e.getSQLState() << "\n"; 
         return EXIT_FAILURE; 
     }
     catch (exception& e) { // Catch general exceptions
