@@ -112,7 +112,8 @@ switch (choice) {
         return EXIT_FAILURE; 
     }
 }
-void initializeDatabase(sql::Connection* con) {
+
+void initializeDatabase(sql::Connection* con) {     // Function to initialize the database
     unique_ptr<sql::Statement> stmt(con->createStatement());
 // Users table for authentication: username (PK), password, role
     stmt->execute(
@@ -257,7 +258,7 @@ void addCriminalInfo(sql::Connection* con) {
     }
 }
 
-// Function to initialize the database
+
 
 
 
