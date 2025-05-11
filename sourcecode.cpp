@@ -167,7 +167,95 @@ void initializeDatabase(sql::Connection* con) {
                 cout << "Failed to drop 'status' column: " << e.what() << "\n";
             }
         }
+        // Check if case_status column exists
+        unique_ptr<sql::ResultSet> colCheckCaseStatus(stmt->executeQuery("SHOW COLUMNS FROM criminals LIKE 'case_status'"));
+        if (!colCheckCaseStatus->next()) {
+            stmt->execute(
+                "ALTER TABLE criminals "
+                "ADD COLUMN case_status ENUM('Open','Closed') DEFAULT 'Open'"
+            );
+        }
+        // Check if witness_record column exists
+        unique_ptr<sql::ResultSet> colCheckWitness(stmt->executeQuery("SHOW COLUMNS FROM criminals LIKE 'witness_record'"));
+        if (!colCheckWitness->next()) {
+            stmt->execute(
+                "ALTER TABLE criminals "
+                "ADD COLUMN witness_record TEXT"
+            );
+        }
+    }
+}
 
+bool authenticateUser(sql::Connection* con, string& username, string& role) {
+    // User inputs username and password, verify against users table
+    cout << "(Authentication) Enter password: ";
+    string password;
+    getline(cin, password);
+
+    unique_ptr<sql::PreparedStatement> pstmt(
+        con->prepareStatement("SELECT role FROM users WHERE username = ? AND password = ?")
+    );
+    pstmt->setString(1, username);
+    pstmt->setString(2, password);
+    unique_ptr<sql::ResultSet> res(pstmt->executeQuery());
+
+    if (res->next()) {
+        role = res->getString("role");
+        return true;
+    }
+    return false;
+}
+
+void addCriminalInfo(sql::Connection* con) {
+    cout << "\n--- Add Criminal Information ---\n";
+    string name, gender, crime, location, witnessRecord;
+    int age;
+    string caseStatus;
+
+    cout << "Enter full name: ";
+    getline(cin, name);
+    cout << "Enter age: ";
+    string ageStr; getline(cin, ageStr);
+    try {
+        age = stoi(ageStr);
+    }
+    catch (...) {
+        cout << "Invalid input for age. Setting age to 0.\n";
+        age = 0;
+    }
+    cout << "Enter gender (Male/Female/Other): ";
+    getline(cin, gender);
+    cout << "Enter crime committed: ";
+    getline(cin, crime);
+    cout << "Enter last known location: ";
+    getline(cin, location);
+    cout << "Enter case status (Open/Closed) [default: Open]: ";
+    getline(cin, caseStatus);
+    if (caseStatus != "Open" && caseStatus != "Closed") {
+        caseStatus = "Open";
+    }
+    cout << "Enter witness record (if any, else leave blank): ";
+    getline(cin, witnessRecord);
+
+    unique_ptr<sql::PreparedStatement> pstmt(
+        con->prepareStatement("INSERT INTO criminals(name, age, gender, crime, last_known_location, case_status, witness_record) VALUES (?, ?, ?, ?, ?, ?, ?)")
+    );
+    pstmt->setString(1, name);
+    pstmt->setInt(2, age);
+    pstmt->setString(3, gender);
+    pstmt->setString(4, crime);
+    pstmt->setString(5, location);
+    pstmt->setString(6, caseStatus);
+    pstmt->setString(7, witnessRecord);
+
+    int updateCount = pstmt->executeUpdate();
+    if (updateCount > 0) {
+        cout << "Criminal information added successfully.\n";
+    }
+    else {
+        cout << "Failed to add criminal information.\n";
+    }
+}
 
 // Function to initialize the database
 
