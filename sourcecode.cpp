@@ -352,6 +352,7 @@ void updateCaseStatus(sql::Connection* con) {
         cout << "Invalid Criminal ID.\n";
         return;
     }
+
 // Check if criminal exists
     unique_ptr<sql::PreparedStatement> checkStmt(
         con->prepareStatement("SELECT id, case_status FROM criminals WHERE id = ?")
@@ -362,6 +363,32 @@ void updateCaseStatus(sql::Connection* con) {
         cout << "Criminal ID " << criminalId << " not found.\n";
         return;
     }
+
+string currentStatus = res->getString("case_status");
+cout << "Current Case Status: " << currentStatus << "\n";
+
+cout << "Enter new case status (Open/Closed): ";
+string newStatus;
+getline(cin, newStatus);
+if (newStatus != "Open" && newStatus != "Closed") {
+    cout << "Invalid status entered. Case status not updated.\n";
+    return;
+} 
+
+ unique_ptr<sql::PreparedStatement> updateStmt(
+        con->prepareStatement("UPDATE criminals SET case_status = ? WHERE id = ?")
+    );
+    updateStmt->setString(1, newStatus);
+    updateStmt->setInt(2, criminalId);
+
+    int affected = updateStmt->executeUpdate();
+    if (affected > 0) {
+        cout << "Case status updated successfully.\n";
+    }
+    else {
+        cout << "Failed to update case status.\n";
+    }
+}
 
 
 
