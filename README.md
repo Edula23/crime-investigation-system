@@ -36,5 +36,63 @@ This is a simple command-line Crime Investigation System built using C++ and MyS
     const string DB_PASS = "your_root_password"; // Your MySQL password
     const string DB_NAME = "crime_investigation"; // The name of the database
     ```
+## Running the Application
+
+1.  **Start the MySQL Server:** Ensure your MySQL server is running.
+
+2.  **Execute the Compiled Program:** Run the compiled executable from your terminal:
+
+    ```bash
+    ./crime_system
+    ```
+
+3.  **Follow the Prompts:** The application will guide you through the login process and the main menu options.
+
+## Default Users
+
+On the first run, if the `users` table is empty, the system will create two default users:
+
+* **Username:** `investigator1`
+    **Password:** `password123`
+    **Role:** `Investigator`
+
+* **Username:** `officer1`
+    **Password:** `password123`
+    **Role:** `Officer`
+
+**Warning:** In a production environment, it is crucial to implement proper password hashing for security. The default users provided here use plain text passwords for simplicity.
+
+## Database Structure
+
+The system uses the following tables in the `crime_investigation` database:
+
+* **`users`:** Stores user authentication information.
+    * `username` (VARCHAR(50), PRIMARY KEY)
+    * `password` (VARCHAR(255), NOT NULL)
+    * `role` (ENUM('Investigator','Officer'), NOT NULL)
+
+* **`criminals`:** Stores information about criminals and their cases.
+    * `id` (INT AUTO_INCREMENT, PRIMARY KEY)
+    * `name` (VARCHAR(100), NOT NULL)
+    * `age` (INT)
+    * `gender` (ENUM('Male','Female','Other'))
+    * `crime` (VARCHAR(255), NOT NULL)
+    * `last_known_location` (VARCHAR(255))
+    * `case_status` (ENUM('Open','Closed'), DEFAULT 'Open')
+    * `witness_record` (TEXT)
+
+## Security Considerations
+
+* **Password Hashing:** The current implementation stores passwords in plain text for the default users. In a real-world application, always use strong password hashing algorithms (e.g., bcrypt, Argon2) to protect user credentials.
+* **SQL Injection:** The code uses prepared statements, which helps prevent SQL injection vulnerabilities. However, always be mindful of user input and sanitize it appropriately if dynamic SQL queries are constructed.
+* **Access Control:** The basic role-based access control (Investigator/Officer) is implemented. You might need more granular permissions based on the application's requirements.
+
+## Future Enhancements
+
+* **More Sophisticated Search Options:** Implement searching for criminals by name, crime, location, or a combination of criteria.
+* **Detailed Case Information:** Create a separate `cases` table to store more detailed information about each crime, linking it to the `criminals` table.
+* **User Management:** Add functionality to create, modify, and delete user accounts.
+* **Reporting Features:** Implement the ability to generate reports on open/closed cases, types of crimes, etc.
+* **GUI Interface:** Develop a graphical user interface for easier interaction.    
 
     **Important:** Replace `"your_root_password"` with your actual MySQL root password or the password of the user you intend to use.
