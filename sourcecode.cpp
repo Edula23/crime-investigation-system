@@ -224,7 +224,7 @@ void addCriminalInfo(sql::Connection* con) {
         cout << "Invalid input for age. Setting age to 0.\n";
         age = 0;
     }
-    cout << "Enter gender (Male/Female/Other): ";
+    cout << "Enter gender (Male/Female): ";
     getline(cin, gender);
     cout << "Enter crime committed: ";
     getline(cin, crime);
