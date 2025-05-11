@@ -112,6 +112,62 @@ switch (choice) {
         return EXIT_FAILURE; 
     }
 }
+void initializeDatabase(sql::Connection* con) {
+    unique_ptr<sql::Statement> stmt(con->createStatement());
+// Users table for authentication: username (PK), password, role
+    stmt->execute(
+        "CREATE TABLE IF NOT EXISTS users ("
+        " username VARCHAR(50) PRIMARY KEY,"
+        " password VARCHAR(255) NOT NULL,"
+        " role ENUM('Investigator','Officer') NOT NULL"
+        ")"
+    );
+
+    // Insert default users if table empty
+    unique_ptr<sql::ResultSet> res(stmt->executeQuery("SELECT COUNT(*) as count FROM users"));
+    res->next();
+    if (res->getInt("count") == 0) {
+        cout << "Creating default users...\n";
+        // WARNING: In production, passwords must be hashed!
+        stmt->execute("INSERT INTO users(username,password,role) VALUES "
+            "('investigator1','password123','Investigator'),"
+            "('officer1','password123','Officer')");
+        cout << "Default users created: investigator1 / officer1 with password 'password123'.\n";
+    }
+
+    // Criminals table setup, drop cases table if any residual
+    stmt->execute("DROP TABLE IF EXISTS cases");
+
+    // Check if criminals table exists
+    unique_ptr<sql::ResultSet> tableCheck(stmt->executeQuery("SHOW TABLES LIKE 'criminals'"));
+    if (!tableCheck->next()) {
+        // Table doesn't exist, create with witness_record and case_status columns, without the status column
+        stmt->execute(
+            "CREATE TABLE criminals ("
+            " id INT AUTO_INCREMENT PRIMARY KEY,"
+            " name VARCHAR(100) NOT NULL,"
+            " age INT,"
+            " gender ENUM('Male','Female','Other'),"
+            " crime VARCHAR(255) NOT NULL,"
+            " last_known_location VARCHAR(255),"
+            " case_status ENUM('Open','Closed') DEFAULT 'Open',"
+            " witness_record TEXT"
+            ")"
+        );
+    }
+    else {
+        // Table exists, check if status column exists; if yes, drop it
+        unique_ptr<sql::ResultSet> colCheckStatus(stmt->executeQuery("SHOW COLUMNS FROM criminals LIKE 'status'"));
+        if (colCheckStatus->next()) {
+            try {
+                stmt->execute("ALTER TABLE criminals DROP COLUMN status");
+                cout << "Dropped 'status' column from criminals table.\n";
+            }
+            catch (sql::SQLException& e) {
+                cout << "Failed to drop 'status' column: " << e.what() << "\n";
+            }
+        }
+
 
 // Function to initialize the database
 
