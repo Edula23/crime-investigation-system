@@ -96,7 +96,7 @@ The system uses the following tables in the `crime_investigation` database:
 * **GUI Interface:** Develop a graphical user interface for easier interaction.    
 
 
-* **Group Members**
+Group Members
 * **Eden Alemayehu - ETS0433/16**
 * **Edom Getahun  - ETS0442/16**
 * **Eden Mengste - ETS0436/16**
