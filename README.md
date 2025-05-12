@@ -1,3 +1,10 @@
+Group Members
+* **Eden Alemayehu - ETS0433/16**
+* **Edom Getahun  - ETS0442/16**
+* **Eden Mengste - ETS0436/16**
+* **Ephratah Girma - ETS0480/16**
+* **Enas Atham - ETS0473/16**
+  
 # Crime Investigation System
 
 This is a simple command-line Crime Investigation System built using C++ and MySQL. It allows authorized users (Investigators and Officers) to manage criminal information and track case statuses.
@@ -96,10 +103,5 @@ The system uses the following tables in the `crime_investigation` database:
 * **GUI Interface:** Develop a graphical user interface for easier interaction.    
 
 
-Group Members
-* **Eden Alemayehu - ETS0433/16**
-* **Edom Getahun  - ETS0442/16**
-* **Eden Mengste - ETS0436/16**
-* **Ephratah Girma - ETS0480/16**
-* **Enas Atham - ETS0473/16**
+
 
