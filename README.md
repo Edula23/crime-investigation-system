@@ -4,6 +4,7 @@ Group Members
 * **Eden Mengste - ETS0436/16**
 * **Ephratah Girma - ETS0480/16**
 * **Enas Atham - ETS0473/16**
+* **Kalkidan Fikadu - ETS0777/16**
   
 # Crime Investigation System
 
