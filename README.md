@@ -95,4 +95,11 @@ The system uses the following tables in the `crime_investigation` database:
 * **Reporting Features:** Implement the ability to generate reports on open/closed cases, types of crimes, etc.
 * **GUI Interface:** Develop a graphical user interface for easier interaction.    
 
-    **Important:** Replace `"your_root_password"` with your actual MySQL root password or the password of the user you intend to use.
+
+* **Group Members**
+* **Eden Alemayehu - ETS0433/16**
+* **Edom Getahun  - ETS0442/16**
+* **Eden Mengste - ETS0436/16**
+* **Ephratah Girma - ETS0480/16**
+* **Enas Atham - ETS0473/16**
+
