@@ -148,7 +148,7 @@ void initializeDatabase(sql::Connection* con) {     // Function to initialize th
             " id INT AUTO_INCREMENT PRIMARY KEY,"
             " name VARCHAR(100) NOT NULL,"
             " age INT,"
-            " gender ENUM('Male','Female','Other'),"
+            " gender ENUM('Male','Female'),"
             " crime VARCHAR(255) NOT NULL,"
             " last_known_location VARCHAR(255),"
             " case_status ENUM('Open','Closed') DEFAULT 'Open',"
