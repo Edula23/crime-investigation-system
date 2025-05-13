@@ -47,9 +47,6 @@ int main() {
         while (!loggedIn) { 
             cout << "\nPlease log in.\nUsername: "; 
             getline(cin, username); 
-            cout << "Password: "; 
-            string password; 
-            getline(cin, password); 
            
             if (authenticateUser (con.get(), username, role)) { 
                 cout << "Login successful as " << role << ": " << username << "\n"; 
