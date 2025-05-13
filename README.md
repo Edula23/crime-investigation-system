@@ -65,7 +65,7 @@ On the first run, if the `users` table is empty, the system will create two defa
     **Role:** `Investigator`
 
 * **Username:** `officer1`
-    **Password:** `password123`
+    **Password:** `pass123`
     **Role:** `Officer`
 
 **Warning:** In a production environment, it is crucial to implement proper password hashing for security. The default users provided here use plain text passwords for simplicity.
@@ -83,7 +83,7 @@ The system uses the following tables in the `crime_investigation` database:
     * `id` (INT AUTO_INCREMENT, PRIMARY KEY)
     * `name` (VARCHAR(100), NOT NULL)
     * `age` (INT)
-    * `gender` (ENUM('Male','Female','Other'))
+    * `gender` (ENUM('Male','Female'))
     * `crime` (VARCHAR(255), NOT NULL)
     * `last_known_location` (VARCHAR(255))
     * `case_status` (ENUM('Open','Closed'), DEFAULT 'Open')
