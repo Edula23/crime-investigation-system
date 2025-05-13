@@ -1,4 +1,4 @@
-Group Members
+## Group Members
 * **Eden Alemayehu - ETS0433/16**
 * **Edom Getahun  - ETS0442/16**
 * **Eden Mengste - ETS0436/16**
